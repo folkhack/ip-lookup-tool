@@ -3,10 +3,10 @@
 
         // Specifies the ECMAScript target version
         "target": "es2020",
-        
+
         // Specifies the module code generation
         "module": "es2020",
-        
+
         // Enables strict type-checking options
         "strict": true,
 
@@ -17,9 +17,9 @@
         //   `import React from 'react'` instead of `import * as React from 'react'`
         "allowSyntheticDefaultImports": true,
 
-        // Modules: "es6" will cause TypeScript to use Classic module resolution which does not resolve non-relative
-        //    imports in node_modules
+        // Modules: Default is TypeScript to use CJS
         // - https://github.com/babel/babel/issues/10237#issuecomment-513028440
+        // - https://www.typescriptlang.org/docs/handbook/module-resolution.html
         "moduleResolution": "node",
     },
 
