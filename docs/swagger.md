@@ -2,7 +2,8 @@
 
 Swagger API specifications offer a standard, language-agnostic way to describe RESTful APIs. This enables automatic documentation, code generation, and client SDK generation, simplifying both development and integration.
 
-Fully defines same API specified in [`docs/http_api.md` »](./http_api.md)
+* Fully defines same API specified at [`docs/http_api.md` »](./http_api.md)
+* Inline swagger `@swagger` jsdoc in Express HTTP API at [`src/lib/HttpApi.ts` »](../src/lib/HttpApi.ts)
 
 ---
 
@@ -14,9 +15,9 @@ Fully defines same API specified in [`docs/http_api.md` »](./http_api.md)
     - `npm run swagger_docs` - Start the Swagger docs server
 * **`package.json --save-dev` Development Dependencies:**
     - [`ts-node`](https://typestrong.org/ts-node/) - TypeScript execution and REPL for Node.js, used to run Swagger Express server
-    - [`swagger-ui-express`]() - Auto-generated [`swagger-ui`](https://swagger.io/tools/swagger-ui/) generated API docs from Express
+    - [`swagger-ui-express`](https://github.com/scottie1984/swagger-ui-express) - Auto-generated [`swagger-ui`](https://swagger.io/tools/swagger-ui/) generated API docs from Express
     - [`@types/swagger-ui-express`](https://www.npmjs.com/package/@types/swagger-ui-express) - Type definitions for `swagger-ui-express`
-    - [`swagger-jsdoc`]() - Reads JSDoc-annotated source code to generate an OpenAPI (Swagger) specification
+    - [`swagger-jsdoc`](https://github.com/Surnet/swagger-jsdoc) - Reads JSDoc-annotated source code to generate an OpenAPI (Swagger) specification
     - [`@types/swagger-jsdoc`](https://www.npmjs.com/package/@types/swagger-jsdoc) - Type definitions for `swagger-jsdoc`
 
 ---

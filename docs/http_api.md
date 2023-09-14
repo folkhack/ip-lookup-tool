@@ -5,7 +5,7 @@ HTTP API for looking up information about an IPv4 or IPv6 address.
 ---
 
 * **Application Entrypoint:**
-    - [`dist/api.js`](../dist/api.js) - Starts the HTTP API Express server
+    - `dist/api.js` - Starts the HTTP API Express server
 * **`package.json` scripts:**
     - `npm run api` - Runs the `dist/api.js` entrypoint to start the HTTP API Express server
 * **`package.json --save` Core Dependencies:**
@@ -24,7 +24,7 @@ HTTP API for looking up information about an IPv4 or IPv6 address.
 This API is documented in two locations:
 
 * **Manually documented** - This doc `http_api.md`
-* Swagger docs in [`swagger.md`](./swagger.md)
+* Swagger workflow documented in [`swagger.md`](./swagger.md)
   - **NOTE:** Hosted Swagger docs has a full IP Address Lookup HTTP API client implementation to use for development/testing!
 
 ---
@@ -151,60 +151,6 @@ This API is documented in two locations:
   "errors": [
     "API response status \"fail\" != \"success\"",
     "API error message \"invalid query\""
-  ]
-}
-```
-
-
-##### API host not found - Failure
-
-* GET "/lookup-ip/209.142.68.29?fields=continentCode,countryCode,region,regionName,city,zip,lat,lon"
-* HTTP response 500
-
-```json
-{
-  "success": false,
-  "query_start_at": "2023-09-00T00:00:17.000Z",
-  "query_stop_at": "2023-09-00T00:00:17.050Z",
-  "query_ms": 50,
-  "errors": [
-    "API host not found"
-  ]
-}
-```
-
-
-##### API connection refused - Failure
-
-* GET "/lookup-ip/209.142.68.29?fields=continentCode,countryCode,region,regionName,city,zip,lat,lon"
-* HTTP response 500
-
-```json
-{
-  "success": false,
-  "query_start_at": "2023-09-00T00:00:17.000Z",
-  "query_stop_at": "2023-09-00T00:00:17.050Z",
-  "query_ms": 50,
-  "errors": [
-    "API connection refused"
-  ]
-}
-```
-
-
-##### API timeout - Failure
-
-* GET "/lookup-ip/209.142.68.29?fields=continentCode,countryCode,region,regionName,city,zip,lat,lon"
-* HTTP response 2000
-
-```json
-{
-  "success": false,
-  "query_start_at": "2023-09-00T00:00:17.000Z",
-  "query_stop_at": "2023-09-00T00:00:17.050Z",
-  "query_ms": 50,
-  "errors": [
-    "API timeout"
   ]
 }
 ```

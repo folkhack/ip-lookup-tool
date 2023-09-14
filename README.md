@@ -45,7 +45,7 @@ nvm use
 npm install
 
 # Copy over the .env.default sample and configure (optional!)
-# - Tests will runn successfully without .env
+# - Tests will run successfully without .env
 cp .env.default .env
 nano .env
 ```
@@ -121,7 +121,7 @@ The following are the major parts that make up the application's build system. T
 * [HTTP API Swagger Docs](docs/swagger.md) - Swagger docs for the HTTP API
 * [Application - CLI](docs/cli.md) - CLI interface for built IP lookup application
 * [Application - HTTP API](docs/http_api.md) - Express HTTP API interface for built IP lookup application
-* [Sublime Text 4](docs/sublime.md) - Project config designed to use TypeScript language server and eslint linting
+* [Sublime Text 4](docs/sublime_text.md) - Project config designed to use TypeScript language server and eslint linting
 
 ---
 
