@@ -1,0 +1,43 @@
+{
+    "compilerOptions": {
+
+        // Specifies the ECMAScript target version
+        "target": "es2020",
+        
+        // Specifies the module code generation
+        "module": "es2020",
+        
+        // Enables strict type-checking options
+        "strict": true,
+
+        // dist should be treated as destroyable minus it's .gitignore directory
+        "outDir": "./dist",
+
+        // Support non "* as" imports; ex:
+        //   `import React from 'react'` instead of `import * as React from 'react'`
+        "allowSyntheticDefaultImports": true,
+
+        // Modules: "es6" will cause TypeScript to use Classic module resolution which does not resolve non-relative
+        //    imports in node_modules
+        // - https://github.com/babel/babel/issues/10237#issuecomment-513028440
+        "moduleResolution": "node",
+    },
+
+    "include": [
+
+        // Transpile files ending in .ts
+        "**/*.ts",
+    ],
+
+    "exclude": [
+
+        // Ignore files ending in .test.ts (Jest tests)
+        "**/*.test.ts",
+
+        // Ignore integration tests directory
+        "./tests",
+
+        // Ignore Swagger docs directory
+        "./swagger",
+    ]
+}

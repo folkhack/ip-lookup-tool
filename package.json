@@ -1,0 +1,63 @@
+{
+  "name": "ip_lookup_tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app.js",
+  "type": "module",
+  "license": "NONE",
+  "private": "true",
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "keywords": [],
+  "author": "folkhack",
+  "contributors": [],
+  "scripts": {
+    "lint": "npx eslint **/*.ts",
+    "lintfix": "npx eslint --fix **/*.ts",
+    "compile": "npx tsc",
+    "clean": "npx rimraf --glob dist/*",
+    "tests": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --silent",
+    "tests_verbose": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
+    "coverage": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --coverage --silent src/lib",
+    "coverage_verbose": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --coverage src/lib",
+    "swagger_docs": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node swagger/serve_swagger_docs.ts",
+    "cli": "node dist/cli.js",
+    "api": "node dist/api.js"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.4",
+    "@types/supertest": "^2.0.12",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.48.0",
+    "eslint-plugin-jest": "^27.2.3",
+    "eslint-plugin-n": "^16.0.2",
+    "jest": "^29.6.4",
+    "rimraf": "^5.0.1",
+    "supertest": "^6.3.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}

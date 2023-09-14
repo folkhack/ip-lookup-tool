@@ -1,0 +1,71 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+        }
+    ],
+
+    "settings": {
+
+        //
+        //  Language server
+        //  - Object-override style as-per docs https://lsp.sublimetext.io/client_configuration/#per-project-overrides
+        //
+
+        "LSP": {
+            "LSP-typescript": {
+
+                // Linux/Mac:
+                "command" : [ "node", "${server_path}", "--stdio" ],
+
+                // Windows:
+                // "command" : [ "C:\\Program Files\\nodejs\\node.exe", "${server_path}", "--stdio" ]
+            }
+        },
+
+        // ██ /Language server ████████████████████████████████████████████████████████████████████████████████████████████
+
+        //
+        //  Linter
+        //  - Flat-override style as-per docs https://www.sublimelinter.com/en/stable/settings.html#project-settings
+        //  - "Notice that, what is a nested object hierarchy in the user settings file, becomes a flat key in the
+        //       project settings"
+        //
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Easy enable/disable
+        "SublimeLinter.linters.eslint.disable" : false,
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // When to lint
+        // - "background"
+        // - "load_save"
+
+        // On every save (recommended)
+        "SublimeLinter.linters.eslint.lint_mode": "load_save",
+
+        // In the background (can be slightly weird)
+        // "SublimeLinter.linters.eslint.lint_mode": "background",
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Use local project eslint binary
+
+        // Linux/Mac:
+        "SublimeLinter.linters.eslint.executable" : [ "npx", "eslint" ],
+
+        // Windows:
+        // "SublimeLinter.linters.eslint.executable" : [ "C:\\Program Files\\nodejs\\npx.cmd", "eslint" ],
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Selector configuration
+        // - https://github.com/SublimeLinter/SublimeLinter-eslint#examples
+        "SublimeLinter.linters.eslint.selector"   : "source.ts - meta.attribute-with-value"
+
+        // ██ /Liinter ███████████████████████████████████████████████████████████████████████████████████████████████████
+    }
+}

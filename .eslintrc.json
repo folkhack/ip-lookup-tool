@@ -1,0 +1,1044 @@
+{
+    //
+    //  folkhack's personal eslint config :D
+    //  - "Standard Style" can be opinionated and difficult to read with it's lack of whitesapce, 2-space indents, and
+    //    varibale naming convention (does not like snake_case)
+    //
+
+    // Search for these strings to find rules regarding each:
+    // - 🔴 Node.js support
+    // - 🟠 TypeScript support
+    // - 🟡 Browser support
+    // - 🟢 Jest support
+    // - 🔵 React support
+
+    "env": {
+        "es6"          : true,  // ES6 support; ex: Map, Set
+        "node"         : true,  // 🔴 Node.js support; ex: process, Buffer
+        "browser"      : false, // 🟡 Browser support; ex: window, document
+        "jest/globals" : true   // 🟢 Jest support; ex: jest
+    },
+
+    "parser": "@typescript-eslint/parser", // 🟠 TypeScript support
+
+    "parserOptions": {
+        "ecmaVersion" : 2020,    // Targeted ECMA version (should match tsconfig.json)
+        "sourceType"  : "module" // Module (package.json type="module")
+    },
+
+    "extends": [
+        "eslint:recommended",
+
+        // 🔴 Node.js support:
+        // - https://github.com/eslint-community/eslint-plugin-n
+        // - Ensure to use eslint-plugin-n as eslint-plugin-node no longer supported
+        "plugin:n/recommended",
+
+        // 🟠 TypeScript support:
+        "plugin:@typescript-eslint/recommended"
+    ],
+
+    "plugins": [
+        "@typescript-eslint", // 🟠 TypeScript support
+        "jest"                // 🟢 Jest support
+    ],
+
+    // Ignore rules
+    "ignorePatterns": [
+        "*.md" // Ignore Markdown JS/TS code segments
+    ],
+
+    "rules": {
+
+        //
+        //  ██  TECHNOLOGY-SPECIFIC RULES  █████████████████████████████████████████████████████████████████████████████████
+        //
+        //  - At top for easy enabling/disabling if employing these tools
+        //
+
+        // ━━ 🔴 Node.js support ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Check to ensure file paths of imports exist
+        // - 🟠 TypeScript support
+        // - 🟢 Jest support
+        "n/no-missing-import": [
+            "off",
+            {
+                // TODO: Map the extensions correctly
+                // - Re-enable when https://github.com/eslint-community/eslint-plugin-n/commit/20d2713de7054b823ab29f40925ba782123208c3
+                //   is in main version; commit literally done 12 hours into work causing issues
+                // - May work hand-in-hand with allowing *.ts imports
+                // "typescriptExtensionMap": [
+                //     [ "", ".js" ],
+                //     [ ".ts", ".js" ],
+                //     [ ".cts", ".cjs" ],
+                //     [ ".mts", ".mjs" ],
+                //     [ ".tsx", ".js" ]
+                // ]
+            }
+        ],
+
+        // Disable process environment variable checking
+        // - Can be a bad practice if environment not correctly isolated
+        "no-process-env": "off",
+
+        // Disable unpublished require/import in lieu of no-extraneous to allow devDependencies
+        // - https://stackoverflow.com/questions/67551956/node-no-unpublished-import-chai-is-not-published#comment129800141_69926854
+        "n/no-unpublished-require" : "off",
+        "n/no-unpublished-import"  : "off",
+        "n/no-extraneous-require"  : "error",
+        "n/no-extraneous-import"   : "error",
+
+        // Disable any process.exit()
+        // - process.exit is still valid if throws/handling are correctly thought through; keeping
+        //   this enabled allows for traditional POSIX CLI applications with consistent/on-exception
+        //   error handling
+        "no-process-exit": "off",
+
+        // Don"t allow new and require in same statement
+        "no-new-require": "error",
+
+        // Blows up on path concat for cross-platform support
+        "no-path-concat": "error",
+
+        // Don"t allow mixed requires, but do allow "require( "something" )( 123 )" calls
+        "no-mixed-requires": [ "error", { "allowCall" : true } ],
+
+        // Nesting a require within a method can have reason - warn
+        "global-require": "warn",
+
+
+        // ━━ 🟠 TypeScript support ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // - No custom rules yet!
+
+
+        // ━━ 🟡 Browser support ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Disable alert, confirm, and prompt
+        "no-alert": "error",
+
+        // Using scripts in URLs is bad practice
+        "no-script-url": "error",
+
+
+        // ━━ 🟢 Jest support ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // - No custom rules yet!
+
+
+        // ━━ 🔵 React support ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // JSX may not be employed in project
+        // "jsx-quotes": "off",
+
+
+        //
+        //  ██  GENERAL ECMA RULES  ████████████████████████████████████████████████████████████████████████████████████████
+        //
+        //  - These rules should apply to modern ECMAScript in all contexts (ex: not just Browser or Node.js)
+        //
+
+        // ━━ Best Practices ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Should we allow console?
+        "no-console": "off",
+
+        // Allow ternary
+        "no-ternary": "off",
+
+        // Allow extra parentheses because people may be using them to hint at order of operations
+        "no-extra-parens": "off",
+
+        // Function name must match assigned value; ie: `const foo = function bar() {};` - intrusive for things like
+        //    arbitrary callback assignments; ex: `const handler = something_callback() {};`
+        "func-name-matching": "off",
+
+        // Disable negated condition enforcement
+        // - Sometimes code is more readable when checking for a negative condition
+        "no-negated-condition": "off",
+
+        // Allow modification or reassignment of function parameters
+        "no-param-reassign": "off",
+
+        // Variable shadowing on out-of-scope stuff is illegal
+        "no-shadow": "off",
+
+        // Allow handling of undefined
+        "no-undef-init" : "off",
+        "no-undefined"  : "off",
+
+        // Don't allow "self = this" hoisting variable names
+        "consistent-this": "warn",
+
+        // Hoisting to the global objects is sometimes needed (ex: window) - only warn on behavior
+        "no-implicit-globals": "warn",
+
+        // Require a guard for prototype properties when processing for-in
+        // - `Object.hasOwn( foo, key )`
+        // - `Object.prototype.hasOwnProperty.call( foo, key )`
+        // - `{}.hasOwnProperty.call( foo, key )`
+        "guard-for-in": "error",
+
+        // Don"t allow variables to be used outside of their scopes (ie: "var")
+        "block-scoped-var": "error",
+
+        // Don"t allow unnecessary primitive wrappers like "Boolean( true )" - makes type expectations confusing
+        "no-new-wrappers": "error",
+
+        // Prevents the use of `.call()` and `.apply()` when not needed
+        "no-useless-call" : "error",
+
+        // Flags empty constructor functions that serve no purpose
+        "no-useless-constructor"   : "error",
+
+        // Eliminates unnecessary renaming of imported or destructured values
+        "no-useless-rename" : "error",
+
+        // Throw error on incorrect or unnecessary usage of `.bind()`
+        "no-extra-bind": "error",
+
+        // No weird type casting using language weirdness... Use stuff like "Boolean()"
+        // - Example: `var b = !!foo;`
+        "no-implicit-coercion": "error",
+
+        // Don"t reassign globals like window
+        "no-native-reassign": "error",
+
+        // Don"t allow weird negation in things like objects/etc.
+        "no-negated-in-lhs": "error",
+
+        // Disable use of comma sequences outside of for loops and parantheses
+        "no-sequences": "error",
+
+        // Prefer the spread operator when doing Object.assign operations
+        "prefer-object-spread": "error",
+
+        // Try to keep "this" scope sane by only tying it to methods
+        "no-invalid-this": "error",
+
+        // If peroperty must follow on new line, ensure starts with "."
+        "dot-location": [
+            "error",
+            "property"
+        ],
+
+        // Always use dot notation; ie: `something.property` vs. `something['property']` when non-variable
+        "dot-notation": "error",
+
+        // Disable Yoda conditionals
+        // - Example `'red' === color` is invalid; should be `color === 'red'`
+        "yoda": [ "error", "never" ],
+
+        // Require descriptions when using Symbol
+        "symbol-description": "error",
+
+        // Only allow throwing of Error instance
+        "no-throw-literal": "error",
+
+        // Avoid duplicate imports/exports
+        "no-duplicate-imports": [
+            "error",
+            { "includeExports" : true }
+        ],
+
+
+        // ━━ General Formatting/Lengths ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Set a VERY relaxed "max-length" for code/comments lines
+        "max-len": [
+            "error",
+            {
+                "code"     : 140,
+                "comments" : 140
+            }
+        ],
+
+        // Set a VERY relaxed file-length limit
+        "max-lines": [ "error", 2500 ],
+
+        // Set a VERY relaxed max lines per-function limit
+        "max-lines-per-function": [ "error", 250 ],
+
+        // Require semi-colons
+        "semi": "error",
+
+        // Semi-colons are at end of line for multi-line purposes (think multi-line for)
+        "semi-style": [
+            "error",
+            "last"
+        ],
+
+        // Only use quotes around properties if needed
+        "quote-props": [ "error", "as-needed" ],
+
+        // Disable unicode BOM
+        "unicode-bom": [
+            "error",
+            "never"
+        ],
+
+        // Turn off sorts
+        "sort-imports" : "off",
+        "sort-keys"    : "off",
+        "sort-vars"    : "off",
+
+        // No .04, must be 0.04
+        "no-floating-decimal": "error",
+
+        // Avoids unnecessary square brackets around object keys, which simplifies object literal definitions
+        "no-useless-computed-key"  : "error",
+
+        // Flags pointless string concatenation, making the code shorter and more readable
+        "no-useless-concat" : "error",
+
+        // Don"t allow more than one statement per-line
+        "max-statements-per-line": [ "error", { "max" : 2 } ],
+
+        // Enforce trailing comma use on multi-line arrays/objects
+        // "comma-dangle": "off"
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+
+
+        // ━━ Code Complexity ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Don"t throw fit on complexity depth
+        "complexity": "off",
+
+        // Max level of nesting
+        "max-depth": [ "error", 4 ],
+
+        // Max level of nested callbacks
+        "max-nested-callbacks": [ "error", 3 ],
+
+        // Set a VERY relaxed max parameters number - should likely be using an object after that point
+        "max-params": [ "error", 6 ],
+
+        // Don"t enforce a max number of statements within a function
+        "max-statements": "off",
+
+        // Don"t allow nested ternarys
+        "no-nested-ternary": "error",
+
+
+        // ━━ Whitespace - Spaces ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // 4-space indent + disable legacy indent rule
+        "indent": [
+            "error",
+            4,
+            {
+                // Don"t blow up switch statement cases
+                "SwitchCase": 1,
+
+                // Offset ternary statements if they"re broken to new lines
+                "offsetTernaryExpressions": true
+            }
+        ],
+
+        "indent-legacy": "off",
+
+        // No \t"s
+        "no-tabs": "error",
+
+        // Align keys within objects
+        // - Weird side-effects, best to let developer handle this
+        "key-spacing": "off",
+        // "key-spacing": [ "error", {
+        //     "singleLine": {
+        //         "beforeColon" : true,
+        //         "afterColon"  : true
+        //     },
+        //     "multiLine": {
+        //         "align": {
+        //             "beforeColon" : true,
+        //             "afterColon"  : true
+        //         }
+        //     }
+        // } ],
+
+        // Always have extra spaces preceeding/proceeding items within array brackets
+        "array-bracket-spacing": [
+            "error",
+            "always"
+        ],
+
+        // Space before/after arrow
+        "arrow-spacing": [
+            "error",
+            {
+                "after"  : true,
+                "before" : true
+            }
+        ],
+
+        // Space before/after code blocks () => { return false; } vs. () => {return false;}
+        "block-spacing": [
+            "error",
+            "always"
+        ],
+
+        // Ensure space after commas
+        "comma-spacing": [
+            "error",
+            {
+                "after"  : true,
+                "before" : false
+            }
+        ],
+
+        // Generator functions require space before/after star
+        "generator-star-spacing": [
+            "error", {
+                "before" : true,
+                "after"  : true
+            }
+        ],
+
+        // Ensures space before/after object properties
+        "computed-property-spacing": [ "error", "always" ],
+
+        // Space before/after keywords, except if(), for(), and while()
+        "keyword-spacing": [
+            "error",
+            {
+                "before"    : true,
+                "after"     : true,
+                "overrides" : {
+                    "if"     : { "after" : false },
+                    "for"    : { "after" : false },
+                    "while"  : { "after" : false },
+                    "switch" : { "after" : false },
+                    "catch"  : { "after" : false }
+                }
+            }
+        ],
+
+        // Don"t allow space between function and opening ()
+        "no-spaced-func": "error",
+
+        // Fix trailing space issues
+        "no-trailing-spaces": "error",
+
+        // No whitespace before property like "foo. bar"
+        "no-whitespace-before-property": "error",
+
+        // Spacing after { and before } for single line objects
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+
+        // No space between ...args like "... args"
+        "rest-spread-spacing": [
+            "error",
+            "never"
+        ],
+
+        // Space after semi-colons if multiple on same line
+        "semi-spacing": [
+            "error",
+            {
+                "before" : false,
+                "after"  : true
+            }
+        ],
+
+        // Put a space before {} blocks
+        "space-before-blocks": "error",
+
+        // No space before parens for functions
+        "space-before-function-paren": [
+            "error",
+            "never"
+        ],
+
+        // Add inner and outter space within parens "( 1 + 1 )"
+        "space-in-parens": [ "error", "always" ],
+
+        // Add space around operations ie: "( 1 + 1 )"
+        "space-infix-ops": "error",
+
+        // Unary ops spacing
+        // - Words like "new" and "typeof" should have spacing
+        // - Non-words like "++" etc. should not have spacing
+        // - ! and !! should have space
+        "space-unary-ops": [
+            "error",
+            {
+                "words"     : true,
+                "nonwords"  : false,
+                "overrides" : {
+                    "!"  : true,
+                    "!!" : true
+                }
+            }
+        ],
+
+        // Spaced comments like you seen on this line
+        "spaced-comment": [
+            "error",
+            "always"
+        ],
+
+        // switch case/default statements have a space after the :
+        "switch-colon-spacing": [
+            "error",
+            {
+                "after"  : true,
+                "before" : false
+            }
+        ],
+
+        // Space before/after yeild star ie: "function * gen()"
+        "yield-star-spacing": [ "error", "both" ],
+
+        // Always use spacing during `asdf ${ variable }` for readability
+        "template-curly-spacing": [ "error", "always" ],
+
+        // Put a space between template tag and template
+        "template-tag-spacing": [ "error", "always" ],
+
+        // No space between function name and opening bracket
+        "func-call-spacing": [
+            "error",
+            "never"
+        ],
+
+
+        // ━━ Whitespace - New lines ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Unix new lines (\n vs \r\n)
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+
+        // Only allow for one line spacing
+        // "no-multi-spaces": "off",
+        "no-multi-spaces": [
+            "error",
+            {
+                "ignoreEOLComments" : true,
+                "exceptions"        : {
+                    "ObjectExpression"     : true,
+                    "Property"             : true,
+                    "AssignmentExpression" : true,
+                    "VariableDeclarator"   : true,
+                    "IfStatement"          : true
+                }
+            }
+        ],
+
+        // Max 2 empty new lines, no new line at BOF, and max one new line at EOF
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max"    : 2,
+                "maxBOF" : 0,
+                "maxEOF" : 1
+            }
+        ],
+
+        // Consistent use of new lines in arrays (either on one line, or broken out to multi-line)
+        "array-bracket-newline" : [ "error", "consistent" ],
+        "array-element-newline" : [ "error", "consistent" ],
+
+        // Opening brace is on the same line, and allow single lines
+        "brace-style": [
+            "error",
+            "1tbs",
+            { "allowSingleLine" : true }
+        ],
+
+        // Enforce consistent function call/args new line patterns (all on one line, or all on new lines)
+        "function-call-argument-newline": [
+            "error",
+            "consistent"
+        ],
+
+        "function-paren-newline": [
+            "error",
+            "consistent"
+        ],
+
+
+        // Ensure no linebreak after => arrow
+        "implicit-arrow-linebreak": [
+            "error",
+            "beside"
+        ],
+
+        // Ensure a line break before a comment
+        "lines-around-comment": [
+            "error",
+            {
+                "beforeLineComment"  : true,
+                "beforeBlockComment" : true
+            }
+        ],
+
+        // Always have new lines around "use strict";
+        "lines-around-directive": [
+            "error",
+            "always"
+        ],
+
+        // Ensure lines between class members except for single-liners
+        "lines-between-class-members": [
+            "error",
+            "always",
+            { "exceptAfterSingleLine" : true }
+        ],
+
+        // Put a new line after variable assigment blocks
+        // - Disabled - veritcal whitespace is up to the developer
+        "newline-after-var": "off",
+
+        // Require new lines before return but not within if conditional or single line scenarios
+        // - Disabled - veritcal whitespace is up to the developer
+        "newline-before-return": "off",
+
+        // Set chain call limit to 3 when on new lines; ie: "something()\n\t.something()\n\t.something()"
+        "newline-per-chained-call": [ "error", { "ignoreChainWithDepth" : 3 } ],
+
+        // No weirdness with \ character to do new lines
+        "no-multi-str": "error",
+
+        // If not using {} with if/etc. ensure everything constrained on same line vs. breaking control scope
+        "nonblock-statement-body-position": "error",
+
+        // Enforce new lines within object {} if multi-line but still allow single-line objects
+        // - "multiline" doesn't work well due to single-properties being broken out on new line causing issues
+        "object-curly-newline": [
+            "error",
+            { "consistent" : true }
+        ],
+
+        // Either all properties are on the same line or enforce multi-line
+        "object-property-newline": [
+            "error",
+            { "allowAllPropertiesOnSameLine" : true }
+        ],
+
+        // If operators and line breaks are being used have the operators trail the operation vs. preceed
+        "operator-linebreak": [ "error", "after" ],        
+
+        // Disable new-line padding between statement block rules
+        // - Best to let developer manage this
+        "padding-line-between-statements": "off",
+
+        // End-of-file must have new line - just a common sense thing that avoids headaches
+        "eol-last": "error",
+
+        // Disable padded blocks - too much whitespace
+        "padded-blocks": "off",
+
+        // Ensure comma on same line as element
+        "comma-style": [
+            "error",
+            "last"
+        ],
+
+
+        // ━━ Naming ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Fully turn off camel case rule - standard is CapitalCase and snake_case
+        "camelcase": "off",
+
+        // As long as keywords are not being stepped on, give developer freedom with naming
+        "id-blacklist" : "off",
+        "id-denylist"  : "off",
+
+        // Don"t enforce a limit to variable names
+        "id-length": "off",
+
+        // Only allow variable names following:
+        // - Does not start with a number
+        // - Upper/lowercase letters
+        // - Numbers allowed
+        // - Underscores allowed
+        // - Special variable names _ and $ are allowed
+        "id-match": [
+            "error",
+            "^[a-zA-Z_$]([a-zA-Z0-9_$]+)?$"
+        ],
+
+        // "private" underscore dangling weirdness - ECMA has no private members deal with it.
+        "no-underscore-dangle": "error",
+
+        // new Something "Something" must be capitalized because it is a class
+        "new-cap": [ "error", { "newIsCap" : true } ],
+
+        // Blacklists
+        // - Certain names may be disallowed from being used as exported names for various reasons
+        // "no-restricted-exports"    : "error",
+        // "no-restricted-globals"    : "error",
+        // "no-restricted-imports"    : "error",
+        // "no-restricted-modules"    : "error",
+        // "no-restricted-properties" : "error",
+        // "no-restricted-syntax"     : "error",
+
+
+        // ━━ Assignment and Declaration ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Allow instantiation without initialization of variable; ex: `let x;`
+        "init-declarations": "off",
+
+        // Variable declaration blocks don"t necessarily need to be at top of function
+        "vars-on-top": "off",
+
+        // Sometimes you want to declare an empty function as a placeholder, or as a future general-use callback
+        "no-empty-function": "off",
+
+        // Allow object shorthand
+        "object-shorthand": "off",
+
+        // Operator assignment is totally fine and can be more readable - allowing
+        "operator-assignment": "off",
+
+        // No need to destructure if you don"t want to
+        "prefer-destructuring": "off",
+
+        // Ensure things are defined before their potential usage
+        "no-use-before-define": "error",
+
+        // Use const when we can
+        "prefer-const": "error",
+
+        // No "var" variable declaration
+        "no-var": "error",
+
+        // Catch can overwrite a variable out of scope so disable this condition
+        "no-catch-shadow": "error",
+
+        // Warn on non-individual variable declarations, ex: "let a = b = c"
+        "no-multi-assign": "warn",
+
+        // Don"t allow single var/let/const to define multiple variables
+        "one-var": [ "error", "never" ],
+
+        // Only allow one variable declaration per-line
+        "one-var-declaration-per-line": "error",
+
+        // Catch ternary statements that can be converted to simpler statemenet
+        "no-unneeded-ternary": "error",
+
+        // If there are unused expressions yell
+        "no-unused-expressions": "error",
+
+        // Assigning a value on return is an odd practice and be obscure/difficult to read
+        "no-return-assign": "error",
+
+
+        // ━━ Classes ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // new must be made with assignment vs just "new Thing();" (no class constructor side-effects)
+        // - constructor can have global assignments that are useful without explicitly needing
+        //   a full instantiated class; example: setup dotenv globals but all methods are static
+        "no-new": "warn",
+
+        // Don"t allow parens around target for instantiation; ie no: "new (Person)()"
+        "new-parens": [ "error", "never" ],
+
+        // Keep getters/setters grouped together
+        "grouped-accessor-pairs": "error",
+
+        // All class getters must have setters
+        "accessor-pairs": "error",
+
+        // Makes sense and can cause confusion as to what constructor is doing
+        "no-constructor-return": "error",
+
+        // No need to use new Object - reject
+        "no-new-object": "error",
+
+        // Don"t throw fit if to convert to static if we don"t use "this"
+        "class-methods-use-this": "off",
+
+        // Ensure only one class-per file
+        "max-classes-per-file": [ "error", 1 ],
+
+
+        // ━━ Operators ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Allow ++
+        "no-plusplus": "off",
+
+        // Allow mixed operators - super restrictive rule
+        // - `a + b * c` is OK
+        "no-mixed-operators": "off",
+
+        // Not very readable to use bitwise operators but don"t outright block use
+        "no-bitwise": "warn",
+
+        // Always enforce === over ==
+        "eqeqeq": "error",
+
+        // Null eqivilence must be === or !==
+        "no-eq-null": "error",
+
+        // Yell on variable compare with self
+        "no-self-compare": "error",
+
+
+        // ━━ Numbers and Math ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Allow numbers inline with code
+        "no-magic-numbers": "off",
+
+        // Disable parsing string literals with parseInt ie: "10010010"
+        "prefer-numeric-literals": "error",
+
+        // Require radix for parseInt
+        // - Can safely assume we"re always going to be using base-10
+        "radix": "off",
+
+        // Avoid numbers that will lose precision at runtime as-per IEEE 754
+        "no-loss-of-precision": "error",
+
+        // Allow Math.pow()
+        "prefer-exponentiation-operator": "off",
+
+
+        // ━━ Strings ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Prefer " for strings for non-concatenation operations
+        "quotes": [ "error", "single" ],
+
+        // Warn on `` strings for concats
+        // - Template literals can be more readable but are much slower than normal string concatenation
+        "prefer-template": "off",
+
+        // As of the ECMAScript 5 specification, escape sequences in string literals are deprecated
+        "no-octal-escape": "error",
+
+        // Look out for incorrect `${variable}` in double or single quoted strings
+        "no-template-curly-in-string": "error",
+
+
+        // ━━ Control Flow ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // If last statement of an else is return then warn because else is unnecessary
+        "no-else-return": "warn",
+
+        // "default" cases not required in "switch" statements
+        "default-case": "off",
+
+        // "default" case must appear as last case in "switch" statement
+        "default-case-last": "error",
+
+        // Default arguments must not become before non-default assigned arguments
+        "default-param-last": "error",
+
+        // Curly braces are not strictly enforced
+        "curly": "off",
+
+        // Disable nested ifs since they can usually be flattened to else-if else conditions
+        "no-lonely-if": "error",
+
+        // Removes unnecessary `return;` statements
+        "no-useless-return" : "error",
+
+        // Allow/disallow "return" without a value (which just returns undefined)
+        "consistent-return": "off",
+
+
+        // ━━ Async ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Only throw warning for await in loop because it can be valid if programming in a synchronus style
+        "no-await-in-loop": "warn",
+
+        // Returning from a promise "executor" function doesn"t do jack
+        "no-promise-executor-return": "error",
+
+        // Warn on synchronus operations
+        // "no-sync": "off",
+        "no-sync": "warn",
+
+        // Throw a fit on unnecessary async
+        "require-await": "error",
+
+        // Enforce atomic updates for async operations
+        "require-atomic-updates": "error",
+
+        // Disable non try/catch on `return await blah()` due to causing extra operations/confusion
+        "no-return-await": "error",
+
+        // Reject Error instance from promises best-practices
+        "prefer-promise-reject-errors": "error",
+
+
+        // ━━ Functional ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Allow anonymous functions w/o names
+        "func-names": "off",
+
+        // Must wrap self-invoking functions with ()
+        "wrap-iife": "error",
+
+        // Array functions like "map" should always have a return statement
+        "array-callback-return": "error",
+
+        // If multiple callbacks are present then enforce "return" to avoid calling callback multiple times
+        "callback-return": "error",
+
+        // Ensure that callback errors are handled with a `if( err )` and not skipped
+        "handle-callback-err": "error",
+
+        // Prefer Reflect.apply
+        "prefer-reflect": "error",
+
+        // Prefer ...args within function params
+        "prefer-rest-params": "error",
+
+        // Prefer ...args spread syntax
+        "prefer-spread": "error",
+
+
+        // ━━ Arrow Functions ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Arrow functions must always have a "body" - https://eslint.org/docs/rules/arrow-body-style
+        // - Makes scope incredibly clear for arrow functions
+        "arrow-body-style": [
+            "error",
+            "always"
+        ],
+
+        // Arrow function arguments must always have parens - https://eslint.org/docs/rules/arrow-parens
+        // - Easier to read, makes arrow functions stand out
+        "arrow-parens": [
+            "error",
+            "always"
+        ],
+
+        // Prefer arrow functions
+        "prefer-arrow-callback": [
+            "warn",
+            { "allowNamedFunctions" : true }
+        ],
+
+        "func-style": [
+            "warn",
+            "expression",
+            { "allowArrowFunctions" : true }
+        ],
+
+        // Disable use of arrow funcitons and ternary at same time
+        "no-confusing-arrow": "error",
+
+
+        // ━━ Loops ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Allow continue
+        "no-continue": "off",
+
+        // If loop control variables are unmodified within loop that is likely an error, warn
+        "no-unmodified-loop-condition": "warn",
+
+        // Don"t allow loop labels to use variable names within it"s scope
+        "no-label-var": "error",
+
+        // Disable labels completely
+        "no-labels": "error",
+
+        // Disable functions in loops due to weird scope issues
+        "no-loop-func": "error",
+
+        // Disable unnecessary usage of loop labels
+        "no-extra-label": "error",
+
+        // Avoid unreachable loop conditions
+        "no-unreachable-loop": "error",
+
+
+        // ━━ Comments ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Should we use jsdoc?
+        "require-jsdoc" : "error",
+        "valid-jsdoc"   : "error",
+
+        // Don"t care if first letter of comment isn't capitalized
+        "capitalized-comments": "off",
+
+        // Allow commenting anywhere; ie: above/to side etc.
+        "line-comment-position": "off",
+
+        // "//"-style multi-line comments
+        "multiline-comment-style": [
+            "error",
+            "separate-lines"
+        ],
+
+        // Inline comments are fine
+        "no-inline-comments": "off",
+
+        // Don"t try looking for TODO/FIXME etc. comments
+        "no-warning-comments": "off",
+
+
+        // ━━ Security ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // No eval statements
+        "no-eval": "error",
+
+        // Don"t allow the `new Function();` ECMA feature
+        "no-new-func": "error",
+
+        // Warn on new Buffer() due to security implications
+        "no-buffer-constructor": "warn",
+
+
+        // ━━ Regex ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Prefer // regex literals over new RegExp
+        "prefer-regex-literals": "error",
+
+        // Opt-in unicode support for regex (ie: use "u")
+        "require-unicode-regexp": "off",
+
+        // Enforce wrapping of regex with () ie: ( /asdf/ ).test( "asdfadsf" )
+        "wrap-regex": "error",
+
+        // Eliminates unnecessary backreferences in regular expressions, affecting the code's length and clarity
+        "no-useless-backreference" : "error",
+
+        // Suggest named capture regex
+        "prefer-named-capture-group": "warn",
+
+        // Disallow regex statements that use = which look like division
+        "no-div-regex": "error",
+
+
+        // ━━ Old language features ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Don't need to use strict due to eslint and modern ECMA
+        "strict": [ "error", "never" ],
+
+        // Disable `Foo.prototype.__iterator__`
+        "no-iterator": "error",
+
+        // Disable `obj.__proto__`
+        "no-proto": "error",
+
+        // Deprecated as-of ECMAScript 2015 strict
+        "no-caller": "error",
+
+        // Disable code blocks since pre-ES6 {} does not define a scope
+        "no-lone-blocks": "error",
+
+        // No extending native objects like Array etc.
+        "no-extend-native": "error",
+
+        // Apparently setTimeout( "alert();", 200 ); is a thing - this is a big nope
+        "no-implied-eval": "error",
+
+        // Don"t allow new Array( 1, 2, 3 ) instantiation due to single-argument being "length" weirdness
+        "no-array-constructor": "error",
+
+        // Don"t use void operator weirdness for pure "undefined"
+        "no-void": "error"
+
+    }
+}
