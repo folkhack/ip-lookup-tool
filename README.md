@@ -81,7 +81,7 @@ node ./dist/api.js
 npm run lint
 
 # Run eslint and automatically fix what we can
-npm run lintfix
+npm run lint_fix
 
 ## Jest tests ##################################################################
 

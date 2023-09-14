@@ -21,7 +21,7 @@
   "contributors": [],
   "scripts": {
     "lint": "npx eslint **/*.ts",
-    "lintfix": "npx eslint --fix **/*.ts",
+    "lint_fix": "npx eslint --fix **/*.ts",
     "compile": "npx tsc",
     "clean": "npx rimraf --glob dist/*",
     "tests": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --silent",
