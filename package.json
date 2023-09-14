@@ -10,10 +10,10 @@
     "node": ">= 14.0.0",
     "npm": ">= 6.0.0"
   },
-  "homepage": "",
+  "homepage": "https://github.com/folkhack/ip-lookup-tool/",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/folkhack/ip-lookup-tool/"
   },
   "bugs": "",
   "keywords": [],
