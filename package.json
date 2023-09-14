@@ -2,7 +2,7 @@
   "name": "ip_lookup_tool",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/app.js",
+  "main": "dist/api.js",
   "type": "module",
   "license": "NONE",
   "private": "true",
