@@ -70,9 +70,12 @@ You may want to set these other properties by hand:
     - [`dotenv`](https://www.npmjs.com/package/dotenv) - `.env` configuration support
 * Dev dependencies
     - [`rimraf`](https://github.com/isaacs/rimraf) - cross-platform rm support (for Windows support)
-    - [`cross-env`](https://github.com/kentcdodds/cross-env) - Run scripts that set and use environment variables across platforms (for Windows support)
 
 ```bash
+# Install dependencies from package.json
+npm install
+
+# Install manually (just here for reference)
 npm install dotenv --save
-npm install rimraf cross-env --save-dev
+npm install rimraf --save-dev
 ```
