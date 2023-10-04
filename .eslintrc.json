@@ -30,7 +30,7 @@
 
     "parserOptions": {
         "ecmaVersion" : 2020,     // Targeted ECMA version (should match tsconfig.json)
-        "sourceType"  : "module", // Module (package.json type="module")
+        "sourceType"  : "module"  // Module (package.json type="module")
 
         // "ecmaFeatures" : { "jsx": true } // 🔵 React support
     },
@@ -45,7 +45,7 @@
 
         // 🟠 TypeScript support:
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended"
 
         // 🔵 React support:
         // "plugin:react/jsx-runtime",
@@ -56,7 +56,7 @@
 
     "plugins": [
         "@typescript-eslint", // 🟠 TypeScript support
-        "jest",               // 🟢 Jest support
+        "jest"                // 🟢 Jest support
 
         // 🔵 React support
         // "react",
