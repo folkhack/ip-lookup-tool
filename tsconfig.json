@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
 
+        // Enables strict type-checking options
+        "strict": true,
+
         // Specifies the ECMAScript target version
         "target": "es2020",
 
         // Specifies the module code generation
         "module": "es2020",
 
-        // Enables strict type-checking options
-        "strict": true,
 
         // dist should be treated as destroyable minus it's .gitignore directory
         "outDir": "./dist",
