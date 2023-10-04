@@ -7,7 +7,6 @@ TypeScript adds static type checking to JavaScript, allowing for early error det
 * **Configuration:**
     - [`tsconfig.json`](../tsconfig.json) - Main configuraiton file that controls TypeScript
 * **`package.json` scripts:**
-    - `npm run clean` - Deletes everything in the `dist/` directory
     - `npm run compile` - Compiles the TypeScript source in `src/**/*.ts` to plain JavaScript in `dest/**/*.js`
 * **`package.json --save-dev` Development Dependencies:**
     - [`typescript`](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript
