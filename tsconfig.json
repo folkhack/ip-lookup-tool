@@ -13,14 +13,23 @@
         // dist should be treated as destroyable minus it's .gitignore directory
         "outDir": "./dist",
 
+        // Modules resolution:
+        // - "node" = Mimics Node.js' module resolution mechanism. Looks inside
+        //   `node_modules` and works with both `.js` and `.json` files. Compatible
+        //    with CJS and ES6 module syntax.
+        // - "bundler" = Supports package.json "imports" and "exports", but unlike
+        //   the Node.js resolution modes, bundler never requires file extensions on
+        //   relative paths in imports.
+        // - "classic" = TypeScript's original resolution strategy. Doesn't consider
+        //   `node_modules` or understand JSON files and is less commonly used today.
+        // - https://github.com/babel/babel/issues/10237#issuecomment-513028440
+        // - https://www.typescriptlang.org/tsconfig#moduleResolution
+        "moduleResolution": "node",
+
         // Support non "* as" imports; ex:
         //   `import React from 'react'` instead of `import * as React from 'react'`
         "allowSyntheticDefaultImports": true,
 
-        // Modules: Default is TypeScript to use CJS
-        // - https://github.com/babel/babel/issues/10237#issuecomment-513028440
-        // - https://www.typescriptlang.org/docs/handbook/module-resolution.html
-        "moduleResolution": "node",
         // Changes the emitted JavaScript to add an extra layer of compatibility for
         //    default imports
         "esModuleInterop": true,
