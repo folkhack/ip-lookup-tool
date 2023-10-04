@@ -21,6 +21,12 @@
         // - https://github.com/babel/babel/issues/10237#issuecomment-513028440
         // - https://www.typescriptlang.org/docs/handbook/module-resolution.html
         "moduleResolution": "node",
+
+        // Path aliases
+        // - Used to avoid excessive relative pathing and/or weird absolute pathing hacks
+        "paths" : {
+            "@src/*" : [ "./src/*" ]
+        },
     },
 
     "include": [

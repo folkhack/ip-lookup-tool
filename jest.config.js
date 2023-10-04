@@ -35,7 +35,7 @@ export default {
         //    files instead of compiling them to JavaScript
         '^(\\.{1,2}/.*)\\.js$': '$1',
 
-    // The default environment in Jest is a Node.js environment
-    // - If you are building a web app, you can use a browser-like environment through jsdom instead
-    // testEnvironment: 'jsdom',
+        // Map the @src path alias defined in `tsconfig.json`
+        '^@src/(.*)' : '<rootDir>/src/$1',
+    },
 };
