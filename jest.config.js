@@ -23,6 +23,8 @@ export default {
     },
 
     // Treat all TypeScript files as ESM modules
+    // - .js not included on this list due to being automatically included based off of the `package.json`
+    //   `"type" : "module"` definition (will throw error if you add .js to this!)
     extensionsToTreatAsEsm : [ '.ts' ],
 
     // Remove the .js extension when running tests because Jest is directly running the TypeScript
