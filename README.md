@@ -4,6 +4,10 @@ This project is a proof-of-concept for a good-practices Node.js/Typescript appli
 
 There is a CLI tool, and a HTTP API.
 
+![Example use of application](docs/img/app_demo.gif)
+
+Corresponding front-end application at: https://github.com/folkhack/ip-lookup-tool-frontend
+
 ##### Application Features:
 
 * Linux, Mac, Windows support
