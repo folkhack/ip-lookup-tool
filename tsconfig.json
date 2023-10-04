@@ -25,6 +25,20 @@
         //    default imports
         "esModuleInterop": true,
 
+        // Allows JavaScript files to be imported
+        // - Needed with ^.+\\.[tj]sx?$ Jest transform so .js `node_modules` are capable of
+        //   being imported
+        // - Disabled by default due to not needing to be enabled by default - usually needed
+        //   importing/testing things in `node_modules` due to own project being TypeScript
+        // "allowJs": true,
+
+        // Additional libs that are available in the global context
+        "lib": [
+            
+            // ESNext for modern JS features (ex: Map, Set)
+            "esnext"
+        ],
+
         // Path aliases
         // - Used to avoid excessive relative pathing and/or weird absolute pathing hacks
         "paths" : {
