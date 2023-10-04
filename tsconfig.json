@@ -41,13 +41,6 @@
         //   importing/testing things in `node_modules` due to own project being TypeScript
         // "allowJs": true,
 
-        // Additional libs that are available in the global context
-        "lib": [
-            
-            // ESNext for modern JS features (ex: Map, Set)
-            "esnext"
-        ],
-
         // Path aliases
         // - Used to avoid excessive relative pathing and/or weird absolute pathing hacks
         "paths" : {
