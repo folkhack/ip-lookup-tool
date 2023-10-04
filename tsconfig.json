@@ -21,6 +21,9 @@
         // - https://github.com/babel/babel/issues/10237#issuecomment-513028440
         // - https://www.typescriptlang.org/docs/handbook/module-resolution.html
         "moduleResolution": "node",
+        // Changes the emitted JavaScript to add an extra layer of compatibility for
+        //    default imports
+        "esModuleInterop": true,
 
         // Path aliases
         // - Used to avoid excessive relative pathing and/or weird absolute pathing hacks
