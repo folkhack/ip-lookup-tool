@@ -10,7 +10,6 @@
         // Specifies the module code generation
         "module": "es2020",
 
-
         // dist should be treated as destroyable minus it's .gitignore directory
         "outDir": "./dist",
 
