@@ -160,26 +160,26 @@ This is an optional list to help you get started modifying this project a sane s
     - [`.eslintrc.json`](/.eslintrc.json)
         + `env.node`
         + `extends` - `plugin:n/recommended`
-        + Remove Node-specific rules
+        + Modify/remove Node-specific rules
 * TypeScript support:
     - [`.eslintrc.json`](/.eslintrc.json)
         + `parser`
         + `extends` - `@typescript-eslint/recommended`
         + `plugins` - `@typescript-eslint`
-        + Remove TypeScript-specific rules
+        + Modify/remove TypeScript-specific rules
 * Browser support:
     - [`tsconfig.json`](/tsconfig.json)
         + `compilerOptions.moduleResolution`
     - [`.eslintrc.json`](/.eslintrc.json)
         + `env.browser`
-        + Remove Browser-specific rules
+        + Modify/remove Browser-specific rules
     - [`jest.config.js`](/jest.config.js)
         + `testEnvironment`
 * Jest support:
     - [`.eslintrc.json`](/.eslintrc.json)
         + `env.jest`
         + `plugins` - `jest`
-        + Remove Jest-specific rules
+        + Modify/remove Jest-specific rules
 
 ---
 
