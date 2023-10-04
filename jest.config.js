@@ -11,7 +11,11 @@ export default {
 
     // Enable useESM true for ts-jest config
     transform: {
-        '^.+\\.tsx?$': [
+
+        // Use ts-jest transform with ESM module support
+        // - Regex supports ts to use ts-jest with useESM flag
+        // - https://kulshekhar.github.io/ts-jest/docs/next/guides/esm-support
+        '^.+\\.ts$': [
             'ts-jest',
             { useESM : true },
         ],
